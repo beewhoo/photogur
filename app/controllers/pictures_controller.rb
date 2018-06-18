@@ -1,19 +1,23 @@
 class PicturesController < ApplicationController
 
   def index
-   @pictures = Picture.all
+   @pictures_recent = Picture.most_recent_four
+   @month_old       = Picture.created_before(Time.now - 1.month)
+   @last_photo      = Picture.all.sample
+
+
   end
 
   def show
-    @picture = Picture.find(params[:id])
+    @picture        = Picture.find(params[:id])
   end
 
   def new
-    @picture = Picture.new
+    @picture_new    = Picture.new
   end
 
   def edit
-    @picture = Picture.find(params[:id])
+    @picture        = Picture.find(params[:id])
   end
 
   def update
@@ -33,13 +37,13 @@ class PicturesController < ApplicationController
 
 
   def create
-    @picture        = Picture.new
+    @picture_new        = Picture.new
 
-    @picture.title  = params[:picture][:title]
-    @picture.artist = params[:picture][:artist]
-    @picture.url    = params[:picture][:url]
+    @picture_new.title  = params[:picture][:title]
+    @picture_new.artist = params[:picture][:artist]
+    @picture_new.url    = params[:picture][:url]
 
-    if  @picture.save
+    if  @picture_new.save
         redirect_to "/pictures"
       else
         render :new
@@ -48,9 +52,8 @@ class PicturesController < ApplicationController
 
 
   def destroy
-    @picture = Picture.find(params[:id])
-    @picture.destroy
-
+    @picture        = Picture.find(params[:id])
+    @picture.delete
     redirect_to "/pictures"
   end
 
