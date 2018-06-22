@@ -10,10 +10,13 @@ class PicturesController < ApplicationController
 
   def show
     @picture        = Picture.find(params[:id])
+    @comment        = Comment.new
+    @comments        = @picture.comments
   end
 
   def new
     @picture_new    = Picture.new
+
   end
 
   def edit
@@ -28,7 +31,8 @@ class PicturesController < ApplicationController
     @picture.url    = params[:picture][:url]
 
     if @picture.save
-      redirect_to "/pictures/#{@picture.id}"
+      flash[:success] = "Picture successfuly updated!"
+      redirect_to picture_path(@picture)
 
       else
         render :edit
@@ -48,13 +52,17 @@ class PicturesController < ApplicationController
       else
         render :new
     end
-  end
+
+
+
+end
 
 
   def destroy
-    @picture        = Picture.find(params[:id])
-    @picture.delete
-    redirect_to "/pictures"
+    @picture = Picture.find(params[:id])
+    @picture.destroy
+    flash[:success] = "Product successfully deleted!"
+    redirect_to root_url
   end
 
 

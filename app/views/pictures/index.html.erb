@@ -1,7 +1,7 @@
 
 
 <div class="newpicture">
-<%= link_to("Login", "/pictures/new") %>
+<%= link_to("New", "/pictures/new") %>
 </div>
 
 
@@ -10,26 +10,17 @@
   <p><%=@last_photo.title%> </p>
   <p><i><%=@last_photo.artist%></i></p>
 </div>
-
-<div class="recent">
-  <h2>Recent </h2>
+<section>
+<h2>Recent </h2>
+<div class="grid">
   <% @pictures_recent.each do |recent| %>
-  <a><%= link_to(image_tag(recent.url), "/pictures/#{recent.id}") %></a>
+  <li><%= link_to(image_tag(recent.url), "/pictures/#{recent.id}") %></li>
   <% end %>
 </div>
 
-
-<div class="this_month">
-  <h2>This month</h2>
+<h2>Last month</h2>
+<div class="grid">
   <% @month_old.each do |picture| %>
-  <%= link_to(image_tag(picture.url), "/pictures/#{picture.id}") %>
-  <% end %>
-</div>
-
-
-<div class="this_year">
-  <h2>This Year</h2>
-  <% @month_old.each do |picture| %>
-  <%= link_to(image_tag(picture.url), "/pictures/#{picture.id}") %>
+  <li><%= link_to(image_tag(picture.url), "/pictures/#{picture.id}") %></li>
   <% end %>
 </div>

@@ -1,7 +1,9 @@
 class Picture < ApplicationRecord
   validates :title, :artist, :url, presence:true
-  validates :title, length:{in: 3..20}
+  validates :title, length:{in: 3..100}
   validates :url, uniqueness:true
+
+  has_many :comments
 
 
 

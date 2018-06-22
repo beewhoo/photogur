@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-  <link rel="stylesheet" href="/style.css">
+
   <title>Alam Photography</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
@@ -14,21 +15,29 @@
 </header>
 
 <nav>
-  <li>Home</li>
-  <li>About me</li>
-  <li>Galleries</li>
-  <li>Contact</li>
+  <a href="/pictures"><li>Home</li></a>
+  <a href="/about"><li>About me</li></a>
+  <a href="/gallery"><li>Galleries</li></a>
+  <a href="/contact"><li>Contact</li></a>
 </nav>
 
 <body>
 
+
 <%= yield %>
-<nav>
-  <li>Home</li>
-  <li>About me</li>
-  <li>Galleries</li>
-  <li>Contact</li>
-</nav>
+
+
+<p class="userinfo">
+   <% if current_user %>
+
+     Signed in as <%= current_user.email %>. <%= link_to "Log out", sessions_path, method: :delete %>
+   <% else %>
+     <%= link_to "Log in", new_sessions_path %> or <%= link_to "Sign up", new_users_path %>
+   <% end %>
+ </p>
+
+
+
 <footer> Alam copyright 2018 </footer>
 </body>
 </html>
