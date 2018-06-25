@@ -1,4 +1,10 @@
-<h1>Sign In</h1>
+<h4>Sign In</h4>
+
+<% if flash[:alert] %>
+<div class="flash"><%= flash[:alert] %></div>
+<% end %>
+
+
 <%= form_for :session, url: sessions_path do |f| %>
 
   <div class="field">

@@ -4,6 +4,8 @@ class Picture < ApplicationRecord
   validates :url, uniqueness:true
 
   has_many :comments
+  belongs_to :user
+
 
 
 
